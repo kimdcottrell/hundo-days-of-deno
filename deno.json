@@ -1,0 +1,13 @@
+{
+    "tasks": {
+        "readDir": "deno run --allow-read ./src/readDir/run.ts"
+    },
+    "nodeModulesDir": "none",
+    "imports": {
+        "@oak/oak": "jsr:@oak/oak@^17.1.4",
+        "@tw-core/mkdwn": "./src/typewriter/modules/markdown/mod.ts"
+    },
+    "workspace": [
+        "./src/typewriter/modules/markdown"
+    ]
+}

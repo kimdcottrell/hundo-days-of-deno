@@ -1,0 +1,21 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: images/app.Dockerfile
+      args:
+        - LOCAL_MACHINE_GID=${LOCAL_MACHINE_GID}
+    env_file:
+      - .env      
+    volumes:
+      - .:/app
+    # command: tail -F /dev/null
+    ports:
+      - "1991:1991"
+    networks:
+      - default
+
+networks:
+  # Creating our own network allows us to connect between containers using their service name.
+  default:
+    driver: bridge
