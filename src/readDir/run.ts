@@ -37,35 +37,42 @@ interface UrlPaths {
  * 
  */
 async function genTree(rootPath: string): [Promise<FileSystemTree>, Promise<UrlPaths>]{
-    let tree = { name: rootPath, isFile: false, children: [] };
-    let urlPaths = [{ name: rootPath, isDir: true }]
-    
+    let tree:       FileSystemTree  = { name: rootPath, isFile: false, children: [] };
+    let urlPaths:   UrlPaths        = [{ path: rootPath, isDir: true }]
+
     try {
-        const paths = Deno.readDir(rootPath);
+        const paths                     = Deno.readDir(rootPath);
+        const promises: Promise<void>[] = [];
+
         for await (const path of paths){
-
-            const fullPath = `${rootPath}/${path.name}`;
-
+            let fullPath = `${rootPath}/${path.name}`;
             // console.log(`reviewing path: ${fullPath}`)
             if (path.isFile) {
                 tree.children?.push({ name: path.name, isFile: true });
-                urlPaths.push({ name: fullPath, isDir: false })
+                urlPaths.push({ path: fullPath, isDir: false })
             } else if (path.isDirectory) {
                 // Deno.readDir only reads the current level.
+                //
                 // This recursion is possible since we only want to review the contents 
-                //   of a dir if it's a dir, and add in 
+                // of a dir if it's a dir, we want to evaluate the next level.
+                //
                 // We are also iterating thru an asyncIterator, so we don't need to worry
-                //   about popping off previously traversed elements. It happens automagically.
+                // about popping off previously traversed elements. It happens automagically.
+                //
                 // Since we are not not returning, the function carries on after this.
-                const [childTree, allUrlPaths] = await genTree(fullPath);
-                
-                // console.log("Child Tree:", JSON.stringify(childTree, null, 2));
-                // console.log("allUrlPaths:", JSON.stringify(allUrlPaths, null, 2));
-                tree.children?.push(childTree);
-                urlPaths.push(...allUrlPaths);
+                //
+                // This promise is pushed out of the loop so the performance gains from await 
+                // since if await is in the loop, the loop cannot continue until it completes.
+                promises.push(
+                    genTree(fullPath).then(([childTree, allUrlPaths]) => {
+                        tree.children?.push(childTree);
+                        urlPaths.push(...allUrlPaths);
+                    })
+                );
             }
         }
 
+        await Promise.all(promises);
         return [tree, urlPaths];
     } catch (err) {
         console.error(err);
