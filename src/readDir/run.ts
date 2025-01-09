@@ -73,16 +73,16 @@ async function genTree(rootPath: string): Promise<[FileSystemTree, [FlatTree]]> 
     }
 }
 
+const rootPath = "/app/src/readDir/content";
+
+// my take on this clocks in at about ~50µs time/iter && ~18.5k iter/s
 Deno.bench("Generate a tree from filesystem", { permissions: { read: true } }, async () => {
-    const rootPath = "/app/src/readDir/content";
     const [fileSystemTree, allFlatTrees] = await genTree(rootPath);
 
-    console.log(JSON.stringify(fileSystemTree, null, 2));
-    console.log("\n\n\n\n\n\n allurls:" + JSON.stringify(allFlatTrees, null, 2));
+    let fileSystemTreeJSON = JSON.stringify(fileSystemTree, null, 2);
+    let allFlatTreesJSON = JSON.stringify(allFlatTrees, null, 2);
 });
   
-
-
 // sanity check for how recursion works
 function iteratorTest(max: number, i: number){
     let n = i ?? 0;
@@ -96,3 +96,39 @@ function iteratorTest(max: number, i: number){
     console.log('You can\'t see me')
 }
 // iteratorTest(10, 1)
+
+
+/**
+ * DAY 3 THOUGHTS: 
+ * ok, so it's 2025 and everything difficult is in a library somewhere.
+ * https://docs.deno.com/examples/walking_directories/
+ * https://jsr.io/@std/fs/doc/walk/~/walk
+ * https://github.com/denoland/std/blob/main/fs/walk.ts 
+ *   - honestly, the source code comments > docs every day 
+ * */ 
+import { walk, walkSync } from "jsr:@std/fs/walk";
+
+// clocks in at ~130µs time/iter && ~7k iter/s
+Deno.bench("Recursive walk", { permissions: { read: true } }, async () => {
+    for await (const dirEntry of walk(rootPath)) {
+       let name = dirEntry.name;
+    }
+});
+
+// clocks in at ~130µs time/iter && ~7k iter/s
+Deno.bench("Recursive walk fromAsync", { permissions: { read: true } }, async () => {
+    await Array.fromAsync(walk(rootPath));
+});
+
+// WE HAVE BECOME SPEEEEEEEEEED: clocks in at 40µs time/iter && ~25.5k iter/s!!!
+Deno.bench("Recursive walkSync", { permissions: { read: true } }, async () => {
+    Array.from(walkSync(rootPath));
+});
+
+
+
+
+
+
+
+

@@ -10,6 +10,7 @@ Day | API/Package | Location
 ---|---|---
 1/100 | Deno.readDir | src/readdir
 2/100 | deno-cli fmt && deno-cli lint | deno.json
+3/100 | Deno.readDir idea better replaced by jsr:@std/fs/walk as proven by Deno.bench | src/readdir
 
 # Helpful reading
 
