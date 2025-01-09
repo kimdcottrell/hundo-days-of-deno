@@ -1,10 +1,10 @@
 {
-  "name": "@tw-core/mkdwn",
-  "version": "0.0.1",
-  "exports": {
-    ".": "./mod.ts"
-  },
-  "imports": {
-    "marked": "npm:marked@^15.0.6"
-  }
+	"name": "@tw-core/mkdwn",
+	"version": "0.0.1",
+	"exports": {
+		".": "./mod.ts"
+	},
+	"imports": {
+		"marked": "npm:marked@^15.0.6"
+	}
 }
