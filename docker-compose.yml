@@ -9,11 +9,32 @@ services:
       - .env      
     volumes:
       - .:/app
-    # command: tail -F /dev/null
     ports:
       - "1991:1991"
     networks:
       - default
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mariadb:${DB_VERSION-latest}
+    networks:
+      - default       
+    environment:
+      MARIADB_USER: ${DB_USER}
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MARIADB_DATABASE: ${DB_NAME}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  db_data:
 
 networks:
   # Creating our own network allows us to connect between containers using their service name.

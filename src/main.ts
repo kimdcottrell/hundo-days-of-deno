@@ -1,5 +1,5 @@
 // TODO: actually make a module instead of merely testing paths
-import { mkdwn } from "@tw-core/mkdwn";
+// import { mkdwn } from "@tw-core/mkdwn";
 
 export default {
   async fetch(request) {
@@ -19,17 +19,17 @@ export default {
             transport protocol = ${url.protocol}
             pathname = ${url.pathname}
         `;
-    for await (const dirEntry of Deno.readDir("./content")) {
-      let filename = dirEntry.name;
-      let route = filename.substr(0, filename.lastIndexOf("."));
-      if (url.pathname == `/${route}`){
-        body += `route: ${route}\n`;
-        const decoder = new TextDecoder("utf-8");
-        const data = await Deno.readFile(`./content/${filename}`);
-        body += `file contents: ${mkdwn.parse(decoder.decode(data))}\n`;
-        break;
-      }
-    }
+    // for await (const dirEntry of Deno.readDir("./content")) {
+    //   let filename = dirEntry.name;
+    //   let route = filename.substr(0, filename.lastIndexOf("."));
+    //   if (url.pathname == `/${route}`){
+    //     body += `route: ${route}\n`;
+    //     const decoder = new TextDecoder("utf-8");
+    //     const data = await Deno.readFile(`./content/${filename}`);
+    //     body += `file contents: ${mkdwn.parse(decoder.decode(data))}\n`;
+    //     break;
+    //   }
+    // }
 
     return new Response(
       new TextEncoder().encode(`
@@ -47,9 +47,3 @@ export default {
     );
   },
 };
-
-(async () => {
-  for await (const dirEntry of Deno.readDir("/.content")) {
-    console.log(dirEntry);
-  }
-})();

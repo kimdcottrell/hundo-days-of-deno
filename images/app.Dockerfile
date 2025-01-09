@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 FROM denoland/deno:2.1.4
 
 # Prefer not to run as root.
@@ -18,6 +19,9 @@ WORKDIR /app
 # Cache the dependencies as a layer (the following two steps are re-run only when deps.ts is modified).
 # Ideally cache deno.json will download and compile _all_ external files used in main.ts.
 COPY deno.json .
+
+# Copy in any workspace referenced in deno.json
+COPY src/typewriter/modules/markdown ./src/typewriter/modules/markdown
 RUN --mount=type=cache,target=${DENO_DIR},uid=${LOCAL_MACHINE_UID},gid=${LOCAL_MACHINE_GID} \
     deno install
 

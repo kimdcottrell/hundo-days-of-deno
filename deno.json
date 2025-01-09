@@ -1,13 +1,40 @@
 {
+    "fmt": {
+        "useTabs": true,
+        "lineWidth": 80,
+        "indentWidth": 4,
+        "semiColons": true,
+        "singleQuote": true,
+        "proseWrap": "preserve",
+        "include": ["src/"]
+    },
+    "imports": {
+        "@tw-core/mkdwn": "./src/typewriter/modules/markdown/mod.ts",
+        "mysql2": "npm:mysql2@^3.12.0"
+    },
+    "lint": {
+        "rules": {
+            "tags": [
+                "recommended"
+            ],
+            "include": [
+                "ban-untagged-ignore",
+                "no-explicit-any",
+                "no-unused-vars",
+                "prefer-const",
+                "camelcase",
+                "ban-types",
+                "consistent-type-imports",
+                "require-await",
+                "prefer-arrow-function"
+            ]
+        }
+    },
+    "nodeModulesDir": "auto",
     "tasks": {
         "readDir": "deno run --allow-read ./src/readDir/run.ts"
     },
-    "nodeModulesDir": "none",
-    "imports": {
-        "@oak/oak": "jsr:@oak/oak@^17.1.4",
-        "@tw-core/mkdwn": "./src/typewriter/modules/markdown/mod.ts"
-    },
     "workspace": [
         "./src/typewriter/modules/markdown"
-    ]
+    ]  
 }
