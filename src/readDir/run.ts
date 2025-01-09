@@ -72,16 +72,6 @@ async function genTree(rootPath: string): Promise<[FileSystemTree, [FlatTree]]> 
         throw err; // Ensure error is propagated
     }
 }
-
-const rootPath = "/app/src/readDir/content";
-
-// my take on this clocks in at about ~50µs time/iter && ~18.5k iter/s
-Deno.bench("Generate a tree from filesystem", { permissions: { read: true } }, async () => {
-    const [fileSystemTree, allFlatTrees] = await genTree(rootPath);
-
-    let fileSystemTreeJSON = JSON.stringify(fileSystemTree, null, 2);
-    let allFlatTreesJSON = JSON.stringify(allFlatTrees, null, 2);
-});
   
 // sanity check for how recursion works
 function iteratorTest(max: number, i: number){
@@ -97,6 +87,18 @@ function iteratorTest(max: number, i: number){
 }
 // iteratorTest(10, 1)
 
+/**
+ * BENCHMARK TIME! Who is the fastest of them all?
+ */
+const rootPath = "/app/src/readDir/content";
+
+// my take on this clocks in at about ~50µs time/iter && ~18.5k iter/s
+Deno.bench("Generate a tree from filesystem", { permissions: { read: true } }, async () => {
+    const [fileSystemTree, allFlatTrees] = await genTree(rootPath);
+
+    let fileSystemTreeJSON = JSON.stringify(fileSystemTree, null, 2);
+    let allFlatTreesJSON = JSON.stringify(allFlatTrees, null, 2);
+});
 
 /**
  * DAY 3 THOUGHTS: 
