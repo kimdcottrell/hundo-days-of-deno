@@ -6,12 +6,21 @@ import * as log from "@std/log";
 import { bold, red } from "jsr:@std/fmt@^1.0.4/colors";
 
 log.setup({
+    // the handler is responsible for the output of messages
     handlers: {
         default: new log.ConsoleHandler("DEBUG", {
             formatter: log.formatters.jsonFormatter,
             useColors: true,
         }),
-        console: new log.ConsoleHandler("DEBUG")
+        console: new log.ConsoleHandler("DEBUG", {
+            formatter: (record) => JSON.stringify({
+                lvl: record.level,
+                msg: record.msg,
+                time: record.datetime.toISOString(),
+                name: record.loggerName,
+            }),
+            useColors: true
+        }),
     },
     loggers: {
         default: {
