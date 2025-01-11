@@ -11,6 +11,7 @@ Day | API/Package | Location
 1/100 | Deno.readDir | src/readdir
 2/100 | deno-cli fmt && deno-cli lint | deno.json
 3/100 | Deno.readDir idea better replaced by jsr:@std/fs/walk as proven by Deno.bench | src/readdir
+4/100 | jsr:@std/log && console | src/logging
 
 # Helpful reading
 
@@ -19,3 +20,4 @@ Day | API/Package | Location
 - [node-mysql2 docs](https://sidorares.github.io/node-mysql2/docs)
 - [v8.dev blog article on async and promises](https://v8.dev/blog/fast-async)
 - [Promises A+](https://promisesaplus.com/)
+- [Pitfalls of using objects as maps](https://2ality.com/2012/01/objects-as-maps.html)
