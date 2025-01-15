@@ -9,6 +9,7 @@
         "include": ["src/"]
     },
     "imports": {
+        "@opentelemetry/api": "npm:@opentelemetry/api@^1.9.0",
         "@std/log": "jsr:@std/log@^0.224.13",
         "@tw-core/mkdwn": "./src/typewriter/modules/markdown/mod.ts",
         "chalk": "npm:chalk@^5.4.1",
@@ -18,24 +19,15 @@
         "rules": {
             "tags": [
                 "recommended"
-            ],
-            "include": [
-                "ban-untagged-ignore",
-                "no-explicit-any",
-                "no-unused-vars",
-                "prefer-const",
-                "camelcase",
-                "ban-types",
-                "consistent-type-imports",
-                "require-await",
-                "prefer-arrow-function"
             ]
         }
     },
     "nodeModulesDir": "auto",
+    // if you use jsonc you can use comments
     "tasks": {
         "logging": "deno run --allow-env ./src/logging/console.ts && deno run ./src/logging/std-logger.ts",
-        "readDir": "deno run --allow-read ./src/readDir/run.ts"
+        "readDir": "deno run --allow-read ./src/readDir/run.ts",
+        "rss-reader": "deno run --allow-net --allow-read --allow-env ./src/rss/run.ts"
     },
     "workspace": [
         "./src/typewriter/modules/markdown"

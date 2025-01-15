@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM denoland/deno:2.1.4
+FROM denoland/deno:2.1.5
 
 # Prefer not to run as root.
 ARG LOCAL_MACHINE_GID=${LOCAL_MACHINE_GID:-1000}
@@ -36,5 +36,10 @@ RUN deno cache main.ts
 # The port that your application listens to.
 EXPOSE 1991
 
-CMD ["serve", "--reload", "--watch", "--allow-read", "--location", "http://0.0.0.0:1991", "--port", "1991", "--allow-env", "main.ts"]
+# ENV OTEL_DENO=1 
+# ENV DENO_UNSTABLE_OTEL_DETERMINISTIC=1
+# ENV OTEL_EXPORTER_OTLP_PROTOCOL="http/json"
+# ENV OTEL_EXPORTER_OTLP_ENDPOINT="http://0.0.0.0:1991"
+CMD ["serve", "--reload", "--unstable-otel", "--watch", "--allow-read", "--location", "http://0.0.0.0:1991", "--port", "1991", "--allow-env", "main.ts"]
+# CMD ["run", "--reload", "--unstable-otel", "--watch", "--allow-read", "--location", "http://0.0.0.0:1991", "--allow-net", "--allow-env", "main.ts"]
 

@@ -12,6 +12,8 @@ Day | API/Package | Location
 2/100 | deno-cli fmt && deno-cli lint | deno.json
 3/100 | Deno.readDir idea better replaced by jsr:@std/fs/walk as proven by Deno.bench | src/readdir
 4/100 | jsr:@std/log && console | src/logging
+5/100 | Deno.telemetry and grafana | standing up grafana locally outside this repo
+6/100 | Deno.permissions, std.streams, std.async | src/rss 
 
 # Helpful reading
 

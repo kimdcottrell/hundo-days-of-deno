@@ -32,6 +32,23 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
+  # TODO: Deno.telemetry does not appear to be in even remotely stable state, check back in on Deno 2.1.6    
+  # otel:
+  #   image: grafana/otel-lgtm:0.8.1
+  #   networks:
+  #     - default
+  #   volumes:
+  #     - ./lgtm/grafana:/data/grafana 
+  #     - ./lgtm/prometheus:/data/prometheus
+  #     - ./lgtm/loki:/data/loki
+  #   environment:
+  #     GF_PATHS_DATA: /data/grafana 
+  #     GF_GID: 984
+  #     GF_UID: 1000
+  #   ports:
+  #     - "3000:3000"
+  #     - "4317:4317"
+  #     - "4318:4318"      
 
 volumes:
   db_data:
