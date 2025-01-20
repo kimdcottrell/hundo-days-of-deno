@@ -1,13 +1,13 @@
 
 
-function pretendToBeProcessing(id: number){
+function processAndThenPostToWebhook(id: number){
     console.log("Pretending to do some heavy processing...")
     setTimeout(() => { 
-        let data = { webhook_monitor: true, processed: true, test_id: id};
+        let data = { webhook: true, processed: true, test_id: id};
 
         // we only want to post and we don't care about the monitor response,
         // so no await or .then() is used
-        fetch("http://host.docker.internal:3000/webhook_monitor", {
+        fetch("http://host.docker.internal:3000/webhook", {
           method: "POST",
           headers: {'Content-Type': 'application/json'}, 
           body: JSON.stringify(data)
@@ -25,31 +25,32 @@ Deno.serve({
     const url = new URL(_req.url);
 
     // we pretend that we're posting something for processing here.
-    const WEBHOOK_TESTING_ROUTE = new URLPattern({ pathname: "/webhook/testing/:id" });
-    let match = WEBHOOK_TESTING_ROUTE.exec(_req.url);
+    const TESTING_ROUTE = new URLPattern({ pathname: "/testing/:id" });
+    let match = TESTING_ROUTE.exec(_req.url);
     if (match) {
         const test_id: number = match.pathname.groups.id;
         // maybe this could be a large db transaction or something that works with many systems, 
         // which eventually attempts a post to a webhook monitor endpont
-        pretendToBeProcessing(test_id);
-        return Response.json({ webhook: true, testing: true, id: test_id });
+        processAndThenPostToWebhook(test_id);
+        console.log(`Original request to /testing/${test_id} has returned a response`);
+        return Response.json({ testing: true, id: test_id });
     }
 
     // we're pretending that after we have done our complicated processing, we wanna know about it by
     // posting details about it to this endpoint
-    const WEBHOOK_MONITOR_ROUTE = new URLPattern({ pathname: "/webhook_monitor" });
-    if (WEBHOOK_MONITOR_ROUTE.exec(_req.url)) {
+    const WEBHOOK_ROUTE = new URLPattern({ pathname: "/webhook" });
+    if (WEBHOOK_ROUTE.exec(_req.url)) {
         if (_req.body) {
           const body = await _req.text();
-          console.log("At /webhook_monitor with this request body:", body);
+          console.log("POST to /webhook with this request body:", body);
           console.log("Done pretending.")
         }
         
-        return Response.json({ webhook_monitor: true });
+        return Response.json({ webhook: true });
     }
 
     // if not routes are passed, load the homepage
-    return new Response("Try again with something like the pathname /webhook/testing/123 - the 123 can be any number.");
+    return new Response("Try again with something like the pathname /testing/123 - the 123 can be any number.");
   }
 );
   
