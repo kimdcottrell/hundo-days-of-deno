@@ -10,7 +10,11 @@ services:
     volumes:
       - .:/app
     ports:
+      - "3000:3000"
+      - "51233:51233"
       - "1991:1991"
+    extra_hosts:
+      - host.docker.internal:host-gateway # used in deno task webhook
     networks:
       - default
     depends_on:

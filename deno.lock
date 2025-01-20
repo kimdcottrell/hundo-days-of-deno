@@ -25,7 +25,10 @@
     "npm:chalk@^5.4.1": "5.4.1",
     "npm:jsdom@*": "26.0.0",
     "npm:marked@^15.0.6": "15.0.6",
-    "npm:mysql2@^3.12.0": "3.12.0"
+    "npm:mysql2@^3.12.0": "3.12.0",
+    "npm:ws@^8.18.0": "8.18.0",
+    "npm:xmldom@0.6": "0.6.0",
+    "npm:xrpl@^4.1.0": "4.1.0"
   },
   "jsr": {
     "@deno/otel@0.0.2": {
@@ -115,6 +118,15 @@
     },
     "@csstools/css-tokenizer@3.0.3": {
       "integrity": "sha512-UJnjoFsmxfKUdNYdWgOB0mWUypuLvAfQPH1+pyvRJs6euowbFkFC6P13w1l8mJyi3vxYMxc9kld5jZEGRQs6bw=="
+    },
+    "@noble/curves@1.8.0": {
+      "integrity": "sha512-j84kjAbzEnQHaSIhRPUmB3/eVXu2k3dKPl2LOrR8fSOIL+89U+7lV117EWHtq/GHM3ReGHM46iRBdZfpc4HRUQ==",
+      "dependencies": [
+        "@noble/hashes"
+      ]
+    },
+    "@noble/hashes@1.7.0": {
+      "integrity": "sha512-HXydb0DgzTpDPwbVeDGCG1gIu7X6+AuU6Zl6av/E/KG8LMsvPntvq+w17CHRpKBmN6Ybdrt1eP3k4cj8DJa78w=="
     },
     "@opentelemetry/api-logs@0.57.0": {
       "integrity": "sha512-l1aJ30CXeauVYaI+btiynHpw341LthkMTv3omi1VJDX14werY2Wmv9n1yudMsq9HuY0m8PvXEVX4d8zxEb+WRg==",
@@ -302,8 +314,41 @@
     "@opentelemetry/semantic-conventions@1.28.0": {
       "integrity": "sha512-lp4qAiMTD4sNWW4DbKLBkfiMZ4jbAboJIGOQr5DvciMRI494OapieI9qiODpOt0XBr1LjIDy1xAGAnVs5supTA=="
     },
+    "@scure/base@1.2.1": {
+      "integrity": "sha512-DGmGtC8Tt63J5GfHgfl5CuAXh96VF/LD8K9Hr/Gv0J2lAoRGlPOMpqMpMbCTOoOJMZCk2Xt+DskdDyn6dEFdzQ=="
+    },
+    "@scure/bip32@1.6.1": {
+      "integrity": "sha512-jSO+5Ud1E588Y+LFo8TaB8JVPNAZw/lGGao+1SepHDeTs2dFLurdNIAgUuDlwezqEjRjElkCJajVrtrZaBxvaQ==",
+      "dependencies": [
+        "@noble/curves",
+        "@noble/hashes",
+        "@scure/base"
+      ]
+    },
+    "@scure/bip39@1.5.1": {
+      "integrity": "sha512-GnlufVSP9UdAo/H2Patfv22VTtpNTyfi+I3qCKpvuB5l1KWzEYx+l2TNpBy9Ksh4xTs3Rn06tBlpWCi/1Vz8gw==",
+      "dependencies": [
+        "@noble/hashes",
+        "@scure/base"
+      ]
+    },
     "@types/shimmer@1.2.0": {
       "integrity": "sha512-UE7oxhQLLd9gub6JKIAhDq06T0F6FnztwMNRvYgjeQSBeMc1ZG/tA47EwfduvkuQS8apbkM/lpLpWsaCeYsXVg=="
+    },
+    "@xrplf/isomorphic@1.0.1": {
+      "integrity": "sha512-0bIpgx8PDjYdrLFeC3csF305QQ1L7sxaWnL5y71mCvhenZzJgku9QsA+9QCXBC1eNYtxWO/xR91zrXJy2T/ixg==",
+      "dependencies": [
+        "@noble/hashes",
+        "eventemitter3",
+        "ws"
+      ]
+    },
+    "@xrplf/secret-numbers@1.0.0": {
+      "integrity": "sha512-qsCLGyqe1zaq9j7PZJopK+iGTGRbk6akkg6iZXJJgxKwck0C5x5Gnwlb1HKYGOwPKyrXWpV6a2YmcpNpUFctGg==",
+      "dependencies": [
+        "@xrplf/isomorphic",
+        "ripple-keypairs"
+      ]
     },
     "acorn-import-attributes@1.9.5_acorn@8.14.0": {
       "integrity": "sha512-n02Vykv5uA3eHGM/Z2dQrcD56kL8TyDb2p1+0P83PClMnC/nc+anbQRhIOWnSq4Ke/KvDPrY3C9hDtC/A3eHnQ==",
@@ -322,6 +367,9 @@
     },
     "aws-ssl-profiles@1.1.2": {
       "integrity": "sha512-NZKeq9AfyQvEeNlN0zSYAaWrmBffJh3IELMZfRpJVWgrpEbtEpnjvzqBPf+mxoI287JohRDoa+/nsfqqiZmF6g=="
+    },
+    "bignumber.js@9.1.2": {
+      "integrity": "sha512-2/mKyZH9K85bzOEfhXDBFZTGd1CTs+5IHpeFQo9luiBG7hghdC851Pj2WAhb6E3R6b9tZj/XKhbg4fum+Kepug=="
     },
     "chalk@5.4.1": {
       "integrity": "sha512-zgVZuo2WcZgfUEmsn6eO3kINexW8RAE4maiQ8QNs8CtpPCSyMiYsULR3HQYkm3w8FIA3SberyMJMSldGsW+U3w=="
@@ -366,6 +414,9 @@
     },
     "entities@4.5.0": {
       "integrity": "sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw=="
+    },
+    "eventemitter3@5.0.1": {
+      "integrity": "sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA=="
     },
     "form-data@4.0.1": {
       "integrity": "sha512-tzN8e4TX8+kkxGPK8D5u0FNmjPUjw3lwC9lSLxxoB/+GtsJG91CO8bSWy73APlgAZzZbXEYZJuxjkHH2w+Ezhw==",
@@ -547,6 +598,29 @@
         "supports-preserve-symlinks-flag"
       ]
     },
+    "ripple-address-codec@5.0.0": {
+      "integrity": "sha512-de7osLRH/pt5HX2xw2TRJtbdLLWHu0RXirpQaEeCnWKY5DYHykh3ETSkofvm0aX0LJiV7kwkegJxQkmbO94gWw==",
+      "dependencies": [
+        "@scure/base",
+        "@xrplf/isomorphic"
+      ]
+    },
+    "ripple-binary-codec@2.2.0": {
+      "integrity": "sha512-93fvAW3oXux4NY5Xf79dUIOhud5DmyEcC5RrTYdl0BPaYOGXC/txCQl9FnwIVZGkVMtZFLcFwJfmH1zFgfRyKA==",
+      "dependencies": [
+        "@xrplf/isomorphic",
+        "bignumber.js",
+        "ripple-address-codec"
+      ]
+    },
+    "ripple-keypairs@2.0.0": {
+      "integrity": "sha512-b5rfL2EZiffmklqZk1W+dvSy97v3V/C7936WxCCgDynaGPp7GE6R2XO7EU9O2LlM/z95rj870IylYnOQs+1Rag==",
+      "dependencies": [
+        "@noble/curves",
+        "@xrplf/isomorphic",
+        "ripple-address-codec"
+      ]
+    },
     "rrweb-cssom@0.8.0": {
       "integrity": "sha512-guoltQEx+9aMf2gDZ0s62EcV8lsXR+0w8915TC3ITdn2YueuNjdAYh/levpU9nFaoChh9RUS5ZdQMrKfVEN9tw=="
     },
@@ -632,6 +706,23 @@
     "xmlchars@2.2.0": {
       "integrity": "sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw=="
     },
+    "xmldom@0.6.0": {
+      "integrity": "sha512-iAcin401y58LckRZ0TkI4k0VSM1Qg0KGSc3i8rU+xrxe19A/BN1zHyVSJY7uoutVlaTSzYyk/v5AmkewAP7jtg=="
+    },
+    "xrpl@4.1.0": {
+      "integrity": "sha512-H/+BCEnFLyQOBUC6h4nMKg7I9AuxHe4kj9ZwQHX2zoL9n/ZOERc6B2U079pogI84zCbYdUWIn4DkoIYvjO/hpg==",
+      "dependencies": [
+        "@scure/bip32",
+        "@scure/bip39",
+        "@xrplf/isomorphic",
+        "@xrplf/secret-numbers",
+        "bignumber.js",
+        "eventemitter3",
+        "ripple-address-codec",
+        "ripple-binary-codec",
+        "ripple-keypairs"
+      ]
+    },
     "zone.js@0.15.0": {
       "integrity": "sha512-9oxn0IIjbCZkJ67L+LkhYWRyAy7axphb3VgE2MBDlOqnmHMPWGYMxJxBYFueFq/JGY2GMwS0rU+UCLunEmy5UA=="
     }
@@ -641,7 +732,10 @@
       "jsr:@std/log@~0.224.13",
       "npm:@opentelemetry/api@^1.9.0",
       "npm:chalk@^5.4.1",
-      "npm:mysql2@^3.12.0"
+      "npm:mysql2@^3.12.0",
+      "npm:ws@^8.18.0",
+      "npm:xmldom@0.6",
+      "npm:xrpl@^4.1.0"
     ],
     "members": {
       "src/typewriter/modules/markdown": {

@@ -13,7 +13,10 @@
         "@std/log": "jsr:@std/log@^0.224.13",
         "@tw-core/mkdwn": "./src/typewriter/modules/markdown/mod.ts",
         "chalk": "npm:chalk@^5.4.1",
-        "mysql2": "npm:mysql2@^3.12.0"
+        "mysql2": "npm:mysql2@^3.12.0",
+        "ws": "npm:ws@^8.18.0",
+        "xmldom": "npm:xmldom@^0.6.0",
+        "xrpl": "npm:xrpl@^4.1.0"
     },
     "lint": {
         "rules": {
@@ -27,7 +30,10 @@
     "tasks": {
         "logging": "deno run --allow-env ./src/logging/console.ts && deno run ./src/logging/std-logger.ts",
         "readDir": "deno run --allow-read ./src/readDir/run.ts",
-        "rss-reader": "deno run --allow-net --allow-read --allow-env ./src/rss/run.ts"
+        "rss-reader": "deno run --allow-net --allow-read --allow-env ./src/rss/run.ts",
+        "xrpl": "deno run --allow-net --allow-read --allow-env ./src/xrpl/tests.ts",
+        "xml": "deno run --allow-net --allow-read --allow-env ./src/xml/run.ts",
+        "webhook": "deno run --reload --watch --allow-read --allow-env --allow-net ./src/webhook/run.ts"
     },
     "workspace": [
         "./src/typewriter/modules/markdown"

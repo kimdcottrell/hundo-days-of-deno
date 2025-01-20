@@ -18,7 +18,7 @@ WORKDIR /app
 
 # Cache the dependencies as a layer (the following two steps are re-run only when deps.ts is modified).
 # Ideally cache deno.json will download and compile _all_ external files used in main.ts.
-COPY deno.json .
+COPY deno.jsonc .
 
 # Copy in any workspace referenced in deno.json
 COPY src/typewriter/modules/markdown ./src/typewriter/modules/markdown
