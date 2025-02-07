@@ -17,16 +17,27 @@ ws.close();
 
 const xrpl = new WebSocket("wss://s.altnet.rippletest.net:51233/");
 
-xrpl.addEventListener("message", (event) => {
-  console.log("Message from server ", event.data);
-});
-
-xrpl.addEventListener("open", (event) => {
-  xrpl.send(`{"command": "account_info",
-  "account": "rwbBVR7HDoFzzMtE1o6VvJ29CK4mrEHbVz",
-  "queue": true,
-  "ledger_index": "current"
+// generated from: https://xrpl.org/resources/dev-tools/xrp-faucets
+xrpl.onopen = (e) => {
+  console.log("CONNECTED");
+  xrpl.send(`{
+    "command": "account_info",
+    "account": "rwLmQf4DtUffjwCvcTUVD8FBSNZPgdVK7",
+    "queue": true,
+    "ledger_index": "current"
   }`);
-});
+}
+
+xrpl.onclose = (e) => {
+  console.log("DISCONNECTED");
+}
+
+xrpl.onmessage = (e) => {
+  console.log("Message from server: ", e.data);
+}
+
+xrpl.onerror = (error) => {
+  console.log("ERROR:", error);
+}
 
 xrpl.close();

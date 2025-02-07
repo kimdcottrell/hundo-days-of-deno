@@ -9,7 +9,7 @@
 import mysql from 'mysql2/promise';
 
 // Create the connection to database
-const connection = await mysql.createConnection({
+export const CONNECTION = await mysql.createConnection({
   host: Deno.env.get("DB_HOST"),
   user: Deno.env.get("DB_USER"),
   password: Deno.env.get("DB_PASSWORD"),

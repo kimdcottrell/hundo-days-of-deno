@@ -52,7 +52,7 @@ async function genTree(rootPath: string): Promise<[FileSystemTree, [FlatTree]]> 
                 tree.children?.push({ name: path.name, isFile: true });
                 flatTree.push({ name: fullPath, isDir: false });
             } else if (path.isDirectory) {
-                const [childTree, allFlatTrees] = await genTree(fullPath);
+                const [childTree, allFlatTree s] = await genTree(fullPath);
                 tree.children?.push(childTree);
                 flatTree.push(...allFlatTrees);
             }

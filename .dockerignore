@@ -1,0 +1,13 @@
+# this file ain't doing shit rn since we're using a bind mount of .:/app in docker-compose.yml 
+# note: https://medium.com/nerd-for-tech/bigger-dockerignore-smaller-docker-images-49fa22e51c7
+# todo: check to see if this gets picked up when using docker compose run
+.git
+.devcontainer
+.vscode
+.*ignore
+node_modules
+.env*
+README.md
+images
+.gitignore
+

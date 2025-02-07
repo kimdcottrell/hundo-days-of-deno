@@ -1,3 +1,6 @@
 # ignore the usual litanny of dev things
 .env
 node_modules
+
+# ignore stuff that is kind of tangential to this challenge
+python/

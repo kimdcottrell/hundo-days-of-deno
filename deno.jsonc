@@ -9,11 +9,13 @@
         "include": ["src/"]
     },
     "imports": {
+        "@noble/curves": "jsr:@noble/curves@^1.8.1",
         "@opentelemetry/api": "npm:@opentelemetry/api@^1.9.0",
         "@std/log": "jsr:@std/log@^0.224.13",
         "@tw-core/mkdwn": "./src/typewriter/modules/markdown/mod.ts",
         "chalk": "npm:chalk@^5.4.1",
         "mysql2": "npm:mysql2@^3.12.0",
+        "socket.io": "npm:socket.io@^4.8.1",
         "ws": "npm:ws@^8.18.0",
         "xmldom": "npm:xmldom@^0.6.0",
         "xrpl": "npm:xrpl@^4.1.0"
@@ -30,8 +32,10 @@
     "tasks": {
         "logging": "deno run --allow-env ./src/logging/console.ts && deno run ./src/logging/std-logger.ts",
         "readDir": "deno run --allow-read ./src/readDir/run.ts",
+        "chat": "deno run --reload --watch --allow-env --allow-net --allow-read ./src/chat/index.ts",
+        "chat-build": "deno run -A https://deno.land/x/esbuild@v0.24.2/mod.js --bundle --minify --target=es2022 --outdir=/src/chat/crypto/public/ --entry-names=\"[dir]/bundle.min\" \"./src/chat/crypto/main.ts\"", // this is so janky but seemingly the only way?
         "rss-reader": "deno run --allow-net --allow-read --allow-env ./src/rss/run.ts",
-        "xrpl": "deno run --allow-net --allow-read --allow-env ./src/xrpl/tests.ts",
+        "xrpl": "deno run --allow-net --allow-read --allow-env ./src/websockets/run.ts",
         "xml": "deno run --allow-net --allow-read --allow-env ./src/xml/run.ts",
         "webhook": "deno run --reload --watch --allow-read --allow-env --allow-net ./src/webhook/run.ts"
     },

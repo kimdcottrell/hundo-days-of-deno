@@ -53,5 +53,4 @@ Deno.serve({
     return new Response("Try again with something like the pathname /testing/123 - the 123 can be any number.");
   }
 );
-  
-  
+

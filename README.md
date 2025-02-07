@@ -17,6 +17,11 @@ Day | API/Package | Location
 7/100 | Deno.websockets | src/websockets
 8/100 | JSDOM and xpath processing | src/xml
 9/100 | Deno.serve - attempting to demonstrate self-made webhooks and a monitor endpoint | src/webhooks
+10/100 | webhooks p2, binary search | src/webhooks, src/leetcode
+11/100 | learning the basics of node:crypto | src/crypto/symmetric_encryption.ts
+12/100 | learning basics of node:crypto; playing with socket.io; realizing src/chat needs to be its own repo with either a bundler or deno's fresh | src/crypto, src/chat
+13/100 | devcontainer and vscode setup | .devcontainer, .vscode
+
 
 # Helpful reading
 - [Deno Style Guide](https://docs.deno.com/runtime/contributing/style_guide/)

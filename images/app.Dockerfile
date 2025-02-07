@@ -1,10 +1,18 @@
 # syntax=docker/dockerfile:1
-FROM denoland/deno:2.1.5
+FROM denoland/deno:2.1.9
 
 # Prefer not to run as root.
 ARG LOCAL_MACHINE_GID=${LOCAL_MACHINE_GID:-1000}
 ARG LOCAL_MACHINE_UID=${LOCAL_MACHINE_UID:-1000}
 RUN usermod -u ${LOCAL_MACHINE_UID} -o deno && groupmod -g ${LOCAL_MACHINE_GID} -o deno
+
+# install python
+RUN apt-get -y update; \ 
+    apt-get install -y --no-install-recommends python3 python3-pip; \
+    apt-get clean; \
+    rm -rf /var/lib/apt/lists/*; \
+    python3 -m pip config set global.break-system-packages true;
+
 
 # fix all the permissions issues for deno
 RUN mkdir -p /home/deno /app /home/.deno/bin; \
@@ -31,7 +39,7 @@ COPY . .
 WORKDIR /app/src
 
 # Compile the main app so that it doesn't need to be compiled each startup/entry.
-RUN deno cache main.ts
+# RUN deno cache main.ts
 
 # The port that your application listens to.
 EXPOSE 1991
