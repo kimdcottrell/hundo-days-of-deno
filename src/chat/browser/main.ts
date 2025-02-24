@@ -48,7 +48,7 @@ if (!getCiphers().includes(encryption_method)) {
 const key = scryptSync(password, salt, secret_key_length);
 const iv = randomFillSync(new Uint8Array(secret_iv_length));
 
-function encrypt(plain_text: string): string {
+export function encrypt(plain_text: string): string {
 	const cipher = createCipheriv(encryption_method, key, iv);
 
 	let encrypted = cipher.update(plain_text, 'utf8', 'hex');
@@ -59,7 +59,7 @@ function encrypt(plain_text: string): string {
 	return encrypted;
 }
 
-function decrypt(encrypted: string): string {
+export function decrypt(encrypted: string): string {
 	const decipher = createDecipheriv(encryption_method, key, iv);
 
 	let decrypted = decipher.update(encrypted, 'hex', 'utf8');

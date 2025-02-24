@@ -21,7 +21,10 @@ Day | API/Package | Location
 11/100 | learning the basics of node:crypto | src/crypto/symmetric_encryption.ts
 12/100 | learning basics of node:crypto; playing with socket.io; realizing src/chat needs to be its own repo with either a bundler or deno's fresh | src/crypto, src/chat
 13/100 | devcontainer and vscode setup | .devcontainer, .vscode
-
+14/100 | deno + fresh experiments | private repo
+15/100 | deno + vite experiments | private repo
+16/100 | deno + nextjs experiments | private repo
+17/100 | updating deno to 2.2.1, setting up otel and the ltfm stack | images/app.Dockerfile, src/chat
 
 # Helpful reading
 - [Deno Style Guide](https://docs.deno.com/runtime/contributing/style_guide/)

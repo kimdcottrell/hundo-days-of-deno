@@ -4,3 +4,6 @@ node_modules
 
 # ignore stuff that is kind of tangential to this challenge
 python/
+
+# grafana stuff
+lgtm
